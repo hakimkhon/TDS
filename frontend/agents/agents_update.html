@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% block title %}Agent Update{% endblock %}
+{% block content%}
+{% load static %}
+
+<section class="text-gray-600 body-font overflow-hidden">
+    <div class="container px-5 py-6 mx-auto">
+        <div class="lg:w-4/5 mx-auto flex flex-wrap space-between">
+            <img alt="ecommerce" class="lg:w-2/6 w-full lg:h-auto h-64 object-cover object-center rounded"
+                src="{% static 'images/img_update.jpg' %}">
+            <div class="lg:w-4/6 w-full lg:pr-10 lg:py-6 mb-6 pl-4 lg:mb-0">
+                <!-- <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2> -->
+                <h1 class="text-gray-900 text-3xl title-font font-medium mb-4"> {{ agent.user.username }} </h1>
+                <div class="flex mb-4">
+                    <a href="{% url 'agents:agent_detail' agent.pk %}"
+                        class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+                        Ma'lumot</a>
+                    <a href="" class="flex-grow  text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
+                        O'zgartirish</a>
+                    <!-- <a class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+                        Fanlar</a> -->
+                </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <span class="grid grid-cols-2 gap-x-auto py-10">                        
+                        <button type="submit"
+                        class="flex-grow mr-8 ml-auto text-white bg-indigo-500 border-0 py-2 px-20 focus:outline-none hover:bg-indigo-600 rounded">
+                            Yangilash
+                        </button>
+                        <button
+                        class="flex-grow mr-8 ml-auto text-white bg-indigo-500 border-0 py-2 px-20 focus:outline-none hover:bg-indigo-600 rounded">
+                            <a href="{% url 'agents:agent_delete' agent.pk %}">
+                                O'chirish
+                            </a>
+                        </button>
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

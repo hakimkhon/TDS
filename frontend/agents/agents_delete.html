@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% block title %}Agent Delate{% endblock %}
+{% block content%}
+{% load static %}
+
+<section class="text-gray-600 body-font relative">
+    <div class="container px-5 py-2 mx-auto">
+        <div class="flex flex-col text-center w-full mb-4">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+                {{agent.user.username }} o'chirilsinmi?
+            </h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+                O'ylab ko'rishingiz uchun yana bir imkoniyat berildi.
+            </p>
+        </div>
+        <div class="lg:w-1/2 md:w-2/3 mx-auto">
+            <div class="flex flex-wrap -m-2">
+                <img alt="ecommerce" class="lg:w-6/6 w-full lg:h-auto h-64 object-cover object-center rounded"
+                    src="{% static 'images/delete.jpg' %}">
+                <form action="" method="post">
+                    <p>
+                        {% csrf_token %}
+                        {{form.as_p}}
+                    </p>
+                    <samp class="grid grid-cols-2 gap-x-auto py-4">
+                        <button type="submit"
+                        class="flex-grow mr-8 ml-auto text-white bg-indigo-500 border-0 py-2 px-20 focus:outline-none hover:bg-indigo-600 rounded">
+                        Albatta
+                    </button>
+                    <button
+                        class="flex-grow ml-auto text-white bg-indigo-500 border-0 py-2 px-14 focus:outline-none hover:bg-indigo-600 rounded">
+                        <a href="{% url 'agents:agent_list' %}">O'ylab ko'ray</a>
+                    </button>
+                    </samp>
+                </form>                                
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
