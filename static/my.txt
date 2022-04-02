@@ -1,3 +1,4 @@
 # uquv-markazi
 git commit -a -m "new",
 git commit -a -m "test",
+git commit -a -m "reset password",
