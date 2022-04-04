@@ -1,4 +1,5 @@
 # from audioop import reverse
+from ast import Assign
 from msilib.schema import ListView
 from multiprocessing import context
 from django.shortcuts import redirect, render, reverse
@@ -6,7 +7,15 @@ from agents.mixins import OrganiserAndLoginRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . import models 
 from .forms import *
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import (
+    TemplateView, 
+    ListView, 
+    DetailView, 
+    CreateView, 
+    UpdateView, 
+    DeleteView,
+    FormView
+)
 
 # class HomePage(TemplateView):
 #     template_name = ("home.html")
@@ -81,3 +90,24 @@ class LeadDeleteView(OrganiserAndLoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('leads:lead_lists')
+
+class AgentAssaginView(OrganiserAndLoginRequiredMixin, FormView):
+    template_name = ("lead/agentni_aniqlash.html")
+    form_class = AssignAgentForm
+    queryset = models.Lead.objects.all()
+
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super(AgentAssaginView, self).get_form_kwargs( **kwargs)
+        kwargs.update({
+                "request": self.request
+            })
+        return kwargs
+    def get_success_url(self):
+        return reverse('leads:lead_lists')
+
+    def form_valid(self, form):
+        agent = form.cleaned_data["agent"]
+        lead = Lead.objects.get(id = self.kwargs["pk"])
+        lead.agent = agent
+        lead.save()
+        return super(AgentAssaginView, self).form_valid(form)

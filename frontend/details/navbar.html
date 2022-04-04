@@ -5,15 +5,15 @@
         <img src="{% static 'images/logo.png' %}" style="width: 50px;" alt="Logo">
         <span class="ml-3 text-xl">Tech Date Soft</span>
       </a>
+      <!-- text-indigo-500 border-b-2 border-indigo-500 -->
       <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-        <a href="/" class="mr-5 hover:text-gray-900">Bosh sahifa</a>
+        <a href="/" class="mr-5 font-medium hover:text-blue-600 ">Bosh sahifa</a>
         {% if request.user.is_authenticated %}
-        <a href="/leads/" class="mr-5 hover:text-gray-900">Studentlar</a>
-        <!-- <a href="{% url 'leads:lead_create' %}" class="mr-5 hover:text-gray-900">Qo'shish</a> -->
+        <a href="/leads/" class="mr-5 font-medium hover:text-blue-600">Studentlar</a>        
         {% if request.user.is_admin %}
-        <a href="/agents/" class="mr-5 hover:text-gray-900">Ustozlar</a>
+        <a href="/agents/" class="mr-5 font-medium hover:text-blue-600">Ustozlar</a>
         {% endif %}
-        <a href="{% url 'galery' %}" class="mr-5 hover:text-gray-900">Galeriya</a>
+        <a href="{% url 'galery' %}" class="mr-5 font-medium hover:text-blue-600">Galeriya</a>
         {% endif %}
       </nav>
       <div class="flex flex-wrap">        
