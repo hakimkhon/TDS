@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% block title %}Agentni aniqlash{% endblock %}
+{% block content%}
+{% load static %}
+
+<section class="text-gray-600 body-font relative">
+    <div class="container px-5 py-2 mx-auto">
+        <div class="lg:w-1/2 md:w-2/3 mx-auto">
+            <div class="flex flex-wrap -m-2">
+                <div class="flex-col text-center w-1/1 mb-4">
+                    <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">
+                      Kerakli ustozni tanlang
+                    </h1>
+                  </div>
+                <form action="" method="post">
+                    <p>
+                        {% csrf_token %}
+                        {{form.as_p}}
+                    </p>
+                    <samp class="grid grid-cols-2 gap-x-auto py-4">
+                        <button type="submit"
+                        class="flex-grow mr-8 ml-auto text-white bg-indigo-500 border-0 py-2 px-20 focus:outline-none hover:bg-indigo-600 rounded">
+                        Tanladim
+                    </button>
+                    <button
+                        class="flex-grow ml-auto text-white bg-indigo-500 border-0 py-2 px-14 focus:outline-none hover:bg-indigo-600 rounded">
+                        <a href="{% url 'leads:lead_lists' %}">O'ylab ko'ray</a>
+                    </button>
+                    </samp>
+                </form>                                
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
