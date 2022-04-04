@@ -1,5 +1,6 @@
 # from audioop import reverse
 from msilib.schema import ListView
+from multiprocessing import context
 from django.shortcuts import redirect, render, reverse
 from agents.mixins import OrganiserAndLoginRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -41,6 +42,18 @@ class LeadListView(LoginRequiredMixin, ListView):
             queryset = queryset.filter(agent__user = self.request.user)
         return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super(LeadListView, self).get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_admin:
+            queryset = Lead.objects.filter(
+                organisation = user.userprofil,
+                agent__isnull = True
+            )
+            context.update({
+                "unassigned_leads": queryset
+            })
+        return context
 class LeadDetailView(LoginRequiredMixin, DetailView):
     template_name = ("lead/lead_details.html")
     queryset = models.Lead.objects.all()
